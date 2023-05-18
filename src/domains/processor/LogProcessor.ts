@@ -1,4 +1,4 @@
-import { isNullOrUndefinedOrEmptu } from "../../utils/StringUtils";
+import { isNullOrEmpty } from "../../utils/StringUtils";
 import { ILogEvent } from "../ILogEvent";
 import { IAppender } from "../appender/IAppender";
 import { IConfiguration } from "../configuration/IConfiguration";
@@ -17,14 +17,19 @@ export class LogProcessor {
     }
   }
 
-  process(logEvent: ILogEvent) {
+  process(logEvent: ILogEvent): void {
     for (let logger of this.configuration.loggers) {
-      if (isNullOrUndefinedOrEmptu(logger.name) || logEvent.loggerName.startsWith(logger.name)) {
+      // Warn : we cannot enable strict mode because of this line
+      // isNullOrUndefinedOrEmpty is not utilizable
+      // it does work when we check in the same line
+      // the result is the same but the compiler is not smart enough to detect that
+      if (logger.name === undefined || isNullOrEmpty(logger.name) || logEvent.loggerName.startsWith(logger.name)) {
         if (logger.level >= logEvent.level) {
           for (let appenderRef of logger.refs) {
             let appender = this.getAppender(appenderRef.ref);
             if (appender == undefined) {
-              // TODO : what to do ?
+              // FIXME : we want to log a warning
+              // But we need an internal log sytem
               continue;
             }
             appender.handle(logEvent);
