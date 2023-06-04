@@ -1,6 +1,6 @@
 {
   "name": "log4j2-typescript",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "log4j2 implementation in Typescript",
   "main": "dist/main.js",
   "source": "src/index.ts",

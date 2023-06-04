@@ -25,7 +25,7 @@ Or
 ## Features
 
 - [x] Appenders
-- [x] Filters
+- [ ] Filters
 - [x] Loggers
 - [x] Factory
 - [ ] Lookups
@@ -46,3 +46,9 @@ Or
 
 - Lookups
   - Need an augmentation framework, or a fallback framework, probably
+
+### Tests
+
+- Test the level filtering system
+- Test the the rooting system
+- Test the layout system

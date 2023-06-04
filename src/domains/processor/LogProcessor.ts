@@ -24,7 +24,7 @@ export class LogProcessor {
       // it does work when we check in the same line
       // the result is the same but the compiler is not smart enough to detect that
       if (logger.name === undefined || isNullOrEmpty(logger.name) || logEvent.loggerName.startsWith(logger.name)) {
-        if (logger.level >= logEvent.level) {
+        if (logEvent.level >= logger.level) {
           for (let appenderRef of logger.refs) {
             let appender = this.getAppender(appenderRef.ref);
             if (appender == undefined) {
